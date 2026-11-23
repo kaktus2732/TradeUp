@@ -28,9 +28,36 @@
 .swaprow img{width:76px;height:60px;flex:0 0 76px;border-radius:8px;background:radial-gradient(ellipse at 50% 70%,#ffffff12,transparent 70%);filter:drop-shadow(0 5px 8px #0008)}
 @media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.art{height:190px}}
 @media(max-width:620px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.art{height:150px}.cardinfo{padding:11px}.art.knife img{transform:scale(1.04)}.art.gloves img{transform:scale(1.02)}.card:hover .art.knife img{transform:scale(1.12)}.card:hover .art.gloves img{transform:scale(1.1)}.price{font-size:13px}}
-</style></head>
+/* TradeUp inventory, player marketplace, and full catalog */
+html{scroll-behavior:smooth;scroll-padding-top:88px}.nav{gap:18px}.nav a{white-space:nowrap}
+.feature-section{margin-top:46px;padding:24px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,var(--panel),#14151a)}
+.feature-section .sectionhead{align-items:center}.feature-section .sectionhead h2{margin:5px 0;font:700 25px 'Space Grotesk'}.feature-section .sectionhead p{max-width:640px}
+.market-tools{display:flex;gap:10px;margin:18px 0 12px}.market-tools .search{flex:1;max-width:none}
+.demo-note{padding:10px 12px;border:1px solid var(--line);border-radius:9px;color:var(--muted);font-size:11px;line-height:1.5;background:var(--panel2);margin:12px 0 16px}
+.listing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.listing-card{min-width:0;border:1px solid var(--line);background:var(--panel2);border-radius:13px;padding:11px;display:flex;flex-direction:column}
+.listing-art{height:128px;border-radius:9px;background:radial-gradient(ellipse at 50% 74%,color-mix(in srgb,var(--glow) 45%,transparent),transparent 70%),#17181d;display:grid;place-items:center;overflow:hidden}
+.listing-art img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 12px #0008)}
+.listing-top{display:flex;justify-content:space-between;align-items:center;margin:10px 0 4px;gap:8px}
+.listing-kind{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 30%,var(--line));border-radius:30px;padding:4px 7px}
+.demo-tag{font-size:9px;color:var(--muted)}
+.listing-card h3{font-size:13px;margin:5px 0 2px}.listing-card .wear{min-height:20px}
+.listing-bottom{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-top:auto;padding-top:12px}
+.listing-bottom .price{font-size:15px}
+.inventory-actions{display:flex;gap:9px;flex-wrap:wrap}.inventory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.inventory-empty{grid-column:1/-1;border:1px dashed var(--line);padding:25px;border-radius:12px;color:var(--muted);text-align:center;font-size:12px}
+.inventory-item{border:1px solid var(--line);border-radius:12px;background:var(--panel2);padding:11px}
+.inventory-item img{width:100%;height:115px;object-fit:contain;background:#17181d;border-radius:8px}
+.inventory-item h3{font-size:12px;margin:9px 0 2px}
+.inventory-item .btn{margin-top:10px;width:100%}
+.catalog-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0;color:var(--muted);font-size:11px}
+.catalog-meta #loadMoreBtn{padding:9px 13px}
+#catalog .filters{flex-wrap:wrap}
+@media(max-width:1000px){.topbar{gap:18px}.nav{gap:11px}.nav a{font-size:11px}.right{gap:7px}.right .btn{padding:9px 10px}.listing-grid,.inventory-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.topbar{height:auto;min-height:64px;padding:10px 16px;gap:12px;flex-wrap:wrap}.nav{order:3;width:100%;overflow:auto;padding:5px 0}.right{margin-left:auto}.balance{display:none}.wrap{padding-left:16px;padding-right:16px}.feature-section{padding:17px;margin-top:28px}.feature-section .sectionhead{align-items:flex-start;flex-wrap:wrap}.feature-section .sectionhead h2{font-size:21px}.inventory-actions{width:100%}.market-tools{flex-wrap:wrap}.market-tools .search{min-width:100%}.listing-grid,.inventory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.listing-grid,.inventory-grid{grid-template-columns:1fr}.listing-art{height:160px}.right .theme-toggle{display:none}}.suggestions{display:grid;gap:5px;margin-top:6px}.suggestion{width:100%;text-align:left;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:7px;padding:9px;font-size:11px}.suggestion:hover{border-color:var(--lime)}.steam-inline{background:transparent;border:0;color:var(--lime);font-weight:700;cursor:pointer}.feature-section code{color:var(--lime);overflow-wrap:anywhere}</style></head>
 <body>
-<header class="topbar"><a class="brand" href="#">Trade<b>Up</b></a><nav class="nav"><a href="#catalog">Маркетплейс</a><a href="#catalog">Скіни</a><a href="#how">Як це працює</a></nav><div class="right"><div class="balance">Баланс <strong id="balance">0,00 ₴</strong></div><button id="themeToggle" class="btn secondary theme-toggle" onclick="toggleThemeMenu(event)" aria-label="Налаштувати колір сайту"><span class="theme-icon">◐</span><span class="theme-label">Тема</span></button><button class="btn secondary" onclick="openModal('topup')">＋ Поповнити</button><button class="btn login" id="loginBtn" onclick="openModal('login')">Увійти</button><button class="btn secondary" id="accountBtn" style="display:none" onclick="openModal('account')">Мій профіль</button></div></header>
+<header class="topbar"><a class="brand" href="#">Trade<b>Up</b></a><nav class="nav"><a href="#player-market">Маркет гравців</a><a href="#catalog">Каталог скінів</a><a href="#inventory">Інвентар</a><a href="#how">Як це працює</a></nav><div class="right"><div class="balance">Баланс <strong id="balance">0,00 ₴</strong></div><button id="themeToggle" class="btn secondary theme-toggle" onclick="toggleThemeMenu(event)" aria-label="Налаштувати колір сайту"><span class="theme-icon">◐</span><span class="theme-label">Тема</span></button><button class="btn secondary" onclick="openModal('topup')">＋ Поповнити</button><button class="btn login" id="loginBtn" onclick="openModal('login')">Увійти</button><button class="btn secondary" id="accountBtn" style="display:none" onclick="openModal('account')">Мій профіль</button></div></header>
 <div class="theme-panel" id="themePanel" onclick="event.stopPropagation()" aria-label="Налаштування кольору сайту">
   <div class="theme-panel-title">Колір сайту</div>
   <div class="theme-panel-hint">Обери акцент або задай власний</div>
@@ -42,12 +69,12 @@
     <button class="swatch" data-accent="#ed6c9e" style="--swatch:#ed6c9e" aria-label="Рожевий" title="Рожевий" onclick="applyAccent('#ed6c9e')"></button>
   </div>
   <label class="custom-color" for="customAccent">Власний колір<input id="customAccent" type="color" value="#c6f36b" oninput="applyAccent(this.value)" aria-label="Обрати власний колір"></label>
-</div><main class="wrap"><section class="hero"><div class="eyebrow">Твій інвентар. Твої правила.</div><h1>Обмінюй.<br><span>Купуй. Грай.</span></h1><p>Знаходь улюблені скіни CS2, збирай свій сет і міняйся з іншими гравцями на TradeUp.</p><button class="btn primary" onclick="document.querySelector('#catalog').scrollIntoView({behavior:'smooth'})">Дослідити маркетплейс&nbsp; ↗</button><div class="stats"><div class="stat"><strong>12,4 тис.</strong><span>скінів у каталозі</span></div><div class="stat"><strong>8,6 тис.</strong><span>угод сьогодні</span></div></div></section>
-<div class="ticker"><span class="live">● LIVE</span><span>Популярне зараз</span><span>AK-47 <strong>«Імператриця»</strong> <em>+2,4%</em></span><span>AWP <strong>«Неонуар»</strong> <em>+1,8%</em></span><span>Ніж <strong>«Тигровий Зуб»</strong> <em>+0,9%</em></span></div>
-<section id="catalog"><div class="sectionhead"><div><h2>Маркетплейс скінів</h2><p>Понад 12 000 предметів — знайди свій наступний скін</p></div><div class="controls"><input class="search" id="search" placeholder="⌕  Пошук скінів..." oninput="render()"><select class="select" id="sort" onchange="render()"><option value="popular">Популярні</option><option value="low">Спочатку дешевші</option><option value="high">Спочатку дорожчі</option></select></div></div><div class="filters"><button class="filter active" data-filter="Усі" onclick="setFilter(this)">Усі скіни</button><button class="filter" data-filter="Гвинтівки" onclick="setFilter(this)">Гвинтівки</button><button class="filter" data-filter="AWP" onclick="setFilter(this)">AWP</button><button class="filter" data-filter="Ножі" onclick="setFilter(this)">Ножі</button><button class="filter" data-filter="Рукавички" onclick="setFilter(this)">Рукавички</button><button class="filter" data-filter="Пістолети" onclick="setFilter(this)">Пістолети</button></div><div class="grid" id="grid"></div></section><section id="how" style="margin-top:45px;padding:24px;border:1px solid var(--line);border-radius:13px;background:var(--panel)"><div class="eyebrow">Почати просто</div><h2 style="font:700 21px 'Space Grotesk';margin:8px 0">Твій інвентар — на твоїх умовах</h2><p style="color:var(--muted);font-size:12px;margin:0;line-height:1.7">Обери скін і купи його за баланс або запропонуй свій предмет для обміну. У цій демо-версії транзакції симульовані; для реальної роботи потрібні сервер, безпечна авторизація Steam і платіжний провайдер.</p></section><footer class="footer"><b>TradeUp</b> © 2025–2026 · Незалежний демо-маркетплейс спільноти CS2</footer></main>
+</div><main class="wrap"><section class="hero"><div class="eyebrow">Твій інвентар. Твої правила.</div><h1>Обмінюй.<br><span>Купуй. Грай.</span></h1><p>Знаходь улюблені скіни CS2, збирай свій сет і міняйся з іншими гравцями на TradeUp.</p><button class="btn primary" onclick="document.querySelector('#catalog').scrollIntoView({behavior:'smooth'})">Дослідити маркетплейс&nbsp; ↗</button><div class="stats"><div class="stat"><strong id="skinCount">Завантаження…</strong><span>скінів у каталозі</span></div><div class="stat"><strong>Демо</strong><span>приклади оголошень</span></div></div></section>
+<div class="ticker"><span class="live">● ДЕМО</span><span>Популярне зараз</span><span>AK-47 <strong>«Імператриця»</strong> <em>+2,4%</em></span><span>AWP <strong>«Неонуар»</strong> <em>+1,8%</em></span><span>Ніж <strong>«Тигровий Зуб»</strong> <em>+0,9%</em></span></div>
+<section id="player-market" class="feature-section"><div class="sectionhead"><div><div class="eyebrow">Угоди між гравцями · демо-режим</div><h2>Маркет гравців</h2><p>Оголошення про продаж та обмін. У демо вони зберігаються лише в цьому браузері.</p></div><button class="btn primary" onclick="openListingModal()">＋ Подати оголошення</button></div><div class="market-tools"><input class="search" id="marketSearch" placeholder="⌕  Пошук в оголошеннях..." oninput="renderPlayerMarket()"><select class="select" id="marketMode" onchange="renderPlayerMarket()"><option value="all">Продаж і обмін</option><option value="sell">Продаж</option><option value="trade">Обмін</option></select></div><div class="demo-note">Демо-оголошення видно лише тобі. Для спільного маркета потрібен сервер із базою даних.</div><div class="listing-grid" id="listingGrid"></div></section><section id="inventory" class="feature-section"><div class="sectionhead"><div><div class="eyebrow">Підключення до Steam</div><h2>Мій інвентар</h2><p id="inventoryStatus">Підключи Steam, щоб завантажити свої предмети.</p></div><div class="inventory-actions"><button class="btn secondary" onclick="refreshSteamInventory()">↻ Оновити</button><button class="btn primary" id="steamBtn" onclick="steamLogin()">Увійти через Steam</button></div></div><div class="demo-note" id="inventoryNote">Steam OpenID і завантаження інвентаря підключаються через сервер. Дані інвентаря не вводяться вручну.</div><div class="inventory-grid" id="inventoryGrid"></div></section><section id="catalog"><div class="sectionhead"><div><div class="eyebrow">Повний довідник CS2</div><h2>Каталог скінів</h2><p id="catalogStatus">Завантажуються скіни та зображення…</p></div><div class="controls"><input class="search" id="search" placeholder="⌕  Пошук скінів..." oninput="render()"><select class="select" id="sort" onchange="render()"><option value="popular">Порядок каталогу</option><option value="name">За назвою</option><option value="weapon">За зброєю</option><option value="rarity">За рідкістю</option></select></div></div><div class="filters"><button class="filter active" data-filter="Усі" onclick="setFilter(this)">Усі скіни</button><button class="filter" data-filter="Гвинтівки" onclick="setFilter(this)">Гвинтівки</button><button class="filter" data-filter="AWP" onclick="setFilter(this)">AWP</button><button class="filter" data-filter="Снайперські гвинтівки" onclick="setFilter(this)">Снайперські</button><button class="filter" data-filter="Пістолети-кулемети" onclick="setFilter(this)">Пістолети-кулемети</button><button class="filter" data-filter="Важка зброя" onclick="setFilter(this)">Важка зброя</button><button class="filter" data-filter="Ножі" onclick="setFilter(this)">Ножі</button><button class="filter" data-filter="Рукавички" onclick="setFilter(this)">Рукавички</button><button class="filter" data-filter="Пістолети" onclick="setFilter(this)">Пістолети</button></div><div class="catalog-meta"><span id="catalogCount">Показуємо популярні предмети</span><button class="btn secondary" id="loadMoreBtn" style="display:none" onclick="loadMoreSkins()">Завантажити ще</button></div><div class="grid" id="grid"></div></section><section id="how" style="margin-top:45px;padding:24px;border:1px solid var(--line);border-radius:13px;background:var(--panel)"><div class="eyebrow">Почати просто</div><h2 style="font:700 21px 'Space Grotesk';margin:8px 0">Твій інвентар — на твоїх умовах</h2><p style="color:var(--muted);font-size:12px;margin:0;line-height:1.7">Обери скін і купи його за баланс або запропонуй свій предмет для обміну. У цій демо-версії транзакції симульовані; для реальної роботи потрібні сервер, безпечна авторизація Steam і платіжний провайдер.</p></section><footer class="footer"><b>TradeUp</b> © 2025–2026 · Незалежний демо-маркетплейс спільноти CS2</footer></main>
 <div class="modalbg" id="modalbg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modalhead"><h3 id="modtitle"></h3><button class="close" onclick="closeModal()">×</button></div><div id="modbody"></div></div></div><div class="toast" id="toast"></div>
 <script>
-const skins=[
+let skins=[
 {name:'Імператриця',weapon:'AK-47',cat:'Гвинтівки',wear:'Трохи поношений',price:3420,grade:'Засекречена',glow:'#bf865a',image:'https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiVI0POlPPNSJf2DHGKD0tF6ueZhW2exxEt152rWzI7_Ii-Ubw90DMB0Ee4C5xOwx9GxZbjk71PXgogWn36tkGoXudZeYvlo/360fx360f'},
 {name:'Неонуар',weapon:'AWP',cat:'AWP',wear:'Після бойових випробувань',price:2180,grade:'Засекречена',glow:'#b651a1',image:'https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk7uW-V6poL_6cB3WvzedxuPUnHirrxR4l423SyI39I3KXPwdxWZclQeNZ5EXskYfnNeyw71OMi9lNzDK-0H3r66pOTw/360fx360f'},
 {name:'Тигровий Зуб',weapon:'Ніж-метелик',cat:'Ножі',wear:'Прямо із заводу',price:18990,grade:'Таємна',glow:'#d4a336',image:'https://cdn.skins.com/730/butterfly-knife-tiger-tooth-factory-new.png'},
@@ -77,12 +104,256 @@ function skinArt(s,index){
  }
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 220"><defs><linearGradient id="back" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#292a33"/><stop offset="1" stop-color="#17181e"/></linearGradient><linearGradient id="finish" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${c}"/><stop offset=".48" stop-color="#d7d9df"/><stop offset="1" stop-color="${c}"/></linearGradient><radialGradient id="halo"><stop stop-color="${c}" stop-opacity=".45"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></radialGradient><pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M22 0H0V22" fill="none" stroke="#fff" stroke-opacity=".04"/></pattern></defs><rect width="440" height="220" rx="12" fill="url(#back)"/><ellipse cx="240" cy="122" rx="185" ry="98" fill="url(#halo)"/><rect width="440" height="220" rx="12" fill="url(#grid)"/><path d="M21 183h398" stroke="#ffffff" stroke-opacity=".11"/><path d="M26 42h60" stroke="${c}" stroke-width="3" opacity=".7"/><text x="26" y="32" fill="#f5f4f1" fill-opacity=".55" font-size="10" font-family="Arial" letter-spacing="2">TRADEUP / CS2 SKIN</text>${item}<text x="414" y="205" text-anchor="end" fill="#f5f4f1" fill-opacity=".52" font-size="10" font-family="Arial" letter-spacing="1">${s.weapon.toUpperCase()}</text></svg>`;
  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
-}const money=n=>n.toLocaleString('uk-UA')+' ₴';function drawBalance(){document.getElementById('balance').textContent=money(user?.balance||0);document.getElementById('loginBtn').style.display=user?'none':'';document.getElementById('accountBtn').style.display=user?'':'none'}function render(){let q=document.getElementById('search').value.toLowerCase(),arr=skins.filter(s=>(filter==='Усі'||s.cat===filter)&&(s.weapon+' '+s.name).toLowerCase().includes(q));let sort=document.getElementById('sort').value;if(sort==='low')arr.sort((a,b)=>a.price-b.price);if(sort==='high')arr.sort((a,b)=>b.price-a.price);document.getElementById('grid').innerHTML=arr.map((s,i)=>`<article class="card"><div class="art ${s.cat==='Ножі'?'knife':s.cat==='Рукавички'?'gloves':'gun'}" style="--glow:${s.glow}"><span class="grade">${s.grade}</span><button class="heart" onclick="this.classList.toggle('on');this.textContent=this.classList.contains('on')?'♥':'♡'">♡</button><img src="${s.image}" onerror="this.onerror=null;this.src='${skinArt(s,skins.indexOf(s))}'" alt="Фото ${s.weapon} | ${s.name}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div><div class="cardinfo"><div class="weapon">${s.weapon}</div><div class="name">${s.name}</div><div class="wear">${s.wear}</div><div class="cardfoot"><span class="price">${money(s.price)}</span><button class="btn primary buy" onclick="buy(${skins.indexOf(s)})">Купити</button></div><button class="btn secondary" style="width:100%;margin-top:7px;padding:8px;font-size:10px" onclick="swap(${skins.indexOf(s)})">⇄ Запропонувати обмін</button></div></article>`).join('')}
+}const money=n=>n.toLocaleString('uk-UA')+' ₴';function drawBalance(){document.getElementById('balance').textContent=money(user?.balance||0);document.getElementById('loginBtn').style.display=user?'none':'';document.getElementById('accountBtn').style.display=user?'':'none'}function render(){let q=document.getElementById('search').value.toLowerCase(),arr=skins.filter(s=>(filter==='Усі'||s.cat===filter)&&(s.weapon+' '+s.name).toLowerCase().includes(q));let sort=document.getElementById('sort').value;if(sort==='low')arr.sort((a,b)=>a.price-b.price);if(sort==='high')arr.sort((a,b)=>b.price-a.price);document.getElementById('grid').innerHTML=arr.map((s,i)=>`<article class="card"><div class="art ${s.cat==='Ножі'?'knife':s.cat==='Рукавички'?'gloves':'gun'}" style="--glow:${s.glow}"><span class="grade">${s.grade}</span><button class="heart" onclick="toggleFavorite(this)">♡</button><img src="${s.image}" onerror="this.onerror=null;this.src='${skinArt(s,skins.indexOf(s))}'" alt="Фото ${s.weapon} | ${s.name}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div><div class="cardinfo"><div class="weapon">${s.weapon}</div><div class="name">${s.name}</div><div class="wear">${s.wear}</div><div class="cardfoot"><span class="price">${money(s.price)}</span><button class="btn primary buy" onclick="buy(${skins.indexOf(s)})">Купити</button></div><button class="btn secondary" style="width:100%;margin-top:7px;padding:8px;font-size:10px" onclick="swap(${skins.indexOf(s)})">⇄ Запропонувати обмін</button></div></article>`).join('')}
 function applyAccent(color){document.documentElement.style.setProperty('--lime',color);localStorage.setItem('tradeupAccent',color);document.querySelectorAll('.swatch').forEach(x=>x.classList.toggle('selected',x.dataset.accent.toLowerCase()===color.toLowerCase()));let picker=document.getElementById('customAccent');if(picker&&picker.value.toLowerCase()!==color.toLowerCase())picker.value=color}
 function toggleThemeMenu(event){event.stopPropagation();document.getElementById('themePanel').classList.toggle('show')}
 document.addEventListener('click',event=>{if(!event.target.closest('#themePanel')&&!event.target.closest('#themeToggle'))document.getElementById('themePanel').classList.remove('show')});
-function setFilter(b){document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;render()}function toast(t){let e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2600)}function save(){localStorage.setItem('tradeupUser',JSON.stringify(user));drawBalance()}function openModal(type,index){let title='',body='';if(type==='login'){title='Ласкаво просимо';body=`<p class="hint">Увійди або створи демо-акаунт TradeUp.</p><div class="field"><label>Електронна пошта</label><input id="email" type="email" placeholder="name@example.com"></div><div class="field"><label>Пароль</label><input id="pass" type="password" placeholder="Мінімум 6 символів"></div><button class="btn primary" onclick="login()">Увійти / Зареєструватися</button><p class="hint">Демо-вхід зберігається лише в цьому браузері. Steam авторизація ще не підключена.</p>`}if(type==='topup'){title='Поповнити баланс';body=`<p class="hint">Оберіть суму поповнення (демо-режим, без списання коштів).</p><div class="amounts"><button class="amount" onclick="selAmount(this,200)">200 ₴</button><button class="amount sel" onclick="selAmount(this,500)">500 ₴</button><button class="amount" onclick="selAmount(this,1000)">1 000 ₴</button></div><div class="field"><label>Інша сума</label><input id="customAmount" type="number" min="50" placeholder="від 50 ₴" oninput="document.querySelectorAll('.amount').forEach(x=>x.classList.remove('sel'))"></div><button class="btn primary" onclick="topup()">Продовжити до оплати</button><p class="hint">Для реальних платежів підключіть платіжного провайдера та серверну перевірку транзакцій.</p>`}if(type==='swap'){let s=skins[index];title='Запропонувати обмін';body=`<div class="swaprow"><img src="${s.image}" alt="${s.weapon} | ${s.name}" onerror="this.style.display='none'"><div><div class="weapon">Хочу отримати</div><b>${s.weapon} | ${s.name}</b></div><b>${money(s.price)}</b></div><p class="hint">Опиши свій предмет або залиш Steam Trade URL — продавець побачить пропозицію (демо).</p><div class="field"><label>Твоя пропозиція</label><input id="offer" placeholder="Назва скіна або Trade URL"></div><button class="btn primary" onclick="closeModal();toast('Пропозицію обміну надіслано (демо)')">Надіслати пропозицію</button>`}if(type==='account'){title='Мій профіль';body=`<p>Вітаємо, <b>${user?.email||'гравцю'}</b></p><p class="hint">Демо-баланс: ${money(user?.balance||0)}. Дані збережено локально у браузері.</p><button class="btn secondary" onclick="user=null;localStorage.removeItem('tradeupUser');drawBalance();closeModal();toast('Ви вийшли з акаунта')">Вийти</button>`}document.getElementById('modtitle').textContent=title;document.getElementById('modbody').innerHTML=body;document.getElementById('modalbg').classList.add('show')}
+function setFilter(b){document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;render()}function toast(t){let e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2600)}function save(){localStorage.setItem('tradeupUser',JSON.stringify(user));drawBalance()}function openModal(type,index){let title='',body='';if(type==='login'){title='Ласкаво просимо';body=`<p class="hint">Увійди або створи демо-акаунт TradeUp.</p><div class="field"><label>Електронна пошта</label><input id="email" type="email" placeholder="name@example.com"></div><div class="field"><label>Пароль</label><input id="pass" type="password" placeholder="Мінімум 6 символів"></div><button class="btn primary" onclick="login()">Увійти / Зареєструватися</button><p class="hint">Демо-вхід зберігається лише в цьому браузері. Steam OpenID потребує сервер. <button type="button" class="steam-inline" onclick="steamLogin()">Увійти через Steam</button></p>`}if(type==='topup'){title='Поповнити баланс';body=`<p class="hint">Оберіть суму поповнення (демо-режим, без списання коштів).</p><div class="amounts"><button class="amount" onclick="selAmount(this,200)">200 ₴</button><button class="amount sel" onclick="selAmount(this,500)">500 ₴</button><button class="amount" onclick="selAmount(this,1000)">1 000 ₴</button></div><div class="field"><label>Інша сума</label><input id="customAmount" type="number" min="50" placeholder="від 50 ₴" oninput="document.querySelectorAll('.amount').forEach(x=>x.classList.remove('sel'))"></div><button class="btn primary" onclick="topup()">Продовжити до оплати</button><p class="hint">Для реальних платежів підключіть платіжного провайдера та серверну перевірку транзакцій.</p>`}if(type==='swap'){let s=skins[index];title='Запропонувати обмін';body=`<div class="swaprow"><img src="${s.image}" alt="${s.weapon} | ${s.name}" onerror="this.style.display='none'"><div><div class="weapon">Хочу отримати</div><b>${s.weapon} | ${s.name}</b></div><b>${money(s.price)}</b></div><p class="hint">Опиши свій предмет або залиш Steam Trade URL — продавець побачить пропозицію (демо).</p><div class="field"><label>Твоя пропозиція</label><input id="offer" placeholder="Назва скіна або Trade URL"></div><button class="btn primary" onclick="closeModal();toast('Пропозицію обміну надіслано (демо)')">Надіслати пропозицію</button>`}if(type==='account'){title='Мій профіль';body=`<p>Вітаємо, <b>${user?.email||'гравцю'}</b></p><p class="hint">Демо-баланс: ${money(user?.balance||0)}. Дані збережено локально у браузері.</p><button class="btn secondary" onclick="user=null;localStorage.removeItem('tradeupUser');drawBalance();closeModal();toast('Ви вийшли з акаунта')">Вийти</button>`}document.getElementById('modtitle').textContent=title;document.getElementById('modbody').innerHTML=body;document.getElementById('modalbg').classList.add('show')}
 function closeModal(){document.getElementById('modalbg').classList.remove('show')}function login(){let e=document.getElementById('email').value,p=document.getElementById('pass').value;if(!e.includes('@')||p.length<6){toast('Вкажи коректну пошту й пароль від 6 символів');return}user={email:e,balance:user?.balance||0};save();closeModal();toast('Вітаємо в TradeUp!')}function selAmount(b,n){document.querySelectorAll('.amount').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');document.getElementById('customAmount').value='';document.getElementById('customAmount').dataset.amount=n}function topup(){let custom=+document.getElementById('customAmount').value,sel=document.querySelector('.amount.sel'),n=custom||+(document.getElementById('customAmount').dataset.amount||500);if(n<50){toast('Мінімальне поповнення — 50 ₴');return}if(!user){closeModal();openModal('login');toast('Увійди, щоб поповнити баланс');return}user.balance+=n;save();closeModal();toast('Демо-баланс поповнено на '+money(n))}function buy(i){if(!user){openModal('login');toast('Увійди або зареєструйся, щоб купити скін');return}let s=skins[i];if(user.balance<s.price){openModal('topup');toast('Недостатньо коштів — поповни баланс');return}if(confirm(`Купити ${s.weapon} | ${s.name} за ${money(s.price)}? (демо)`)){user.balance-=s.price;save();toast('Скін придбано! (демо-операція)')}}function swap(i){openModal('swap',i)}
-applyAccent(localStorage.getItem('tradeupAccent')||'#c6f36b');drawBalance();render();
+/* Catalog data and marketplace interactions */
+window.TRADEUP_CONFIG = window.TRADEUP_CONFIG || {apiBase:''};
+const featuredSkins = skins.slice();
+let catalogItems = skins;
+let catalogLimit = 48;
+let catalogFilter = 'Усі';
+let steamSession = null;
+let steamInventory = [];
+let demoInventory = JSON.parse(localStorage.getItem('tradeupInventory') || '[]');
+let selectedListingSkin = null;
+const API_BASE = String(window.TRADEUP_CONFIG.apiBase || '').replace(/\/+$/,'');
+const skinCatalogUrl = 'https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en/skins.json';
+function esc(value){return String(value ?? '').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function readListings(){try{return JSON.parse(localStorage.getItem('tradeupListings')||'null')}catch(e){return null}}
+function saveListings(){localStorage.setItem('tradeupListings',JSON.stringify(playerListings))}
+function makeDemoListings(){return featuredSkins.slice(0,8).map(function(s,i){return {id:'sample-'+i,type:i===2||i===5?'trade':'sell',price:s.price,item:{id:'sample-skin-'+i,marketName:s.weapon+' | '+s.name,name:s.name,weapon:s.weapon,cat:s.cat,wear:s.wear,grade:s.grade,image:s.image,glow:s.glow},seller:'Демо-продавець '+(i+1),demo:true}})}
+let playerListings = readListings();
+if(!Array.isArray(playerListings)){playerListings=makeDemoListings();saveListings()}
+const rarityUk={'Consumer Grade':'Споживчий','Industrial Grade':'Промисловий','Mil-Spec Grade':'Армійський','Restricted':'Засекречена','Classified':'Таємна','Covert':'Прихована','Contraband':'Контрабанда','Extraordinary':'Надзвичайна','Distinguished':'Видатна','Exceptional':'Виняткова','Superior':'Вищого класу'};
+const wearUk={'Factory New':'Прямо із заводу','Minimal Wear':'З мінімальним зносом','Field-Tested':'Після бойових випробувань','Well-Worn':'Значно зношений','Battle-Scarred':'Загартований у боях'};
+function normalizeSkin(x){
+ const category=(x.category&&x.category.name)||'';
+ const cats={'Rifles':'Гвинтівки','Sniper Rifles':'Снайперські гвинтівки','Pistols':'Пістолети','SMGs':'Пістолети-кулемети','Heavy':'Важка зброя','Knives':'Ножі','Gloves':'Рукавички'};
+ const marketName=x.market_hash_name||x.name||'CS2 skin';
+ const pieces=marketName.split(' | ');
+ const weapon=(x.weapon&&x.weapon.name)||pieces[0]||'CS2';
+ const name=(x.pattern&&x.pattern.name)||pieces.slice(1).join(' | ')||x.name||marketName;
+ const rawWears=Array.isArray(x.wears)?x.wears.map(function(w){return wearUk[w.name]||w.name}):[];
+ const rarity=(x.rarity&&x.rarity.name)||'Скін CS2';
+ return {id:String(x.id||marketName),marketName:marketName,name:name,weapon:weapon,cat:cats[category]||'Інше',wear:rawWears[0]||'Варіанти зносу в картці',wears:rawWears,price:null,grade:rarityUk[rarity]||rarity,glow:(x.rarity&&x.rarity.color)||'#8b92a3',image:x.image||x.thumbnail||'',category:category}
+}
+function render(){
+ const input=document.getElementById('search');
+ const q=(input?input.value:'').trim().toLowerCase();
+ const matching=catalogItems.filter(function(s){
+  const catOk=catalogFilter==='Усі'||(catalogFilter==='AWP'?s.weapon.toLowerCase().includes('awp'):s.cat===catalogFilter);
+  return catOk&&(s.marketName+' '+s.weapon+' '+s.name).toLowerCase().includes(q)
+ });
+ const sort=document.getElementById('sort');
+ if(sort&&sort.value==='name')matching.sort(function(a,b){return a.marketName.localeCompare(b.marketName)});
+ if(sort&&sort.value==='weapon')matching.sort(function(a,b){return a.weapon.localeCompare(b.weapon)||a.marketName.localeCompare(b.marketName)});
+ if(sort&&sort.value==='rarity')matching.sort(function(a,b){return a.grade.localeCompare(b.grade)||a.marketName.localeCompare(b.marketName)});
+ const visible=matching.slice(0,catalogLimit);
+ document.getElementById('grid').innerHTML=visible.map(function(s){
+  const i=catalogItems.indexOf(s);
+  const hasPrice=Number.isFinite(s.price)&&s.price>0;
+  const artClass=s.cat==='Ножі'?'knife':s.cat==='Рукавички'?'gloves':'gun';
+  const photo=s.image||'';
+  return '<article class="card"><div class="art '+artClass+'" style="--glow:'+esc(s.glow)+'"><span class="grade">'+esc(s.grade)+'</span><button class="heart" onclick="toggleFavorite(this)">♡</button><img src="'+esc(photo)+'" data-fallback="'+esc(skinArt(s,i))+'" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="'+esc(s.marketName)+'" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div><div class="cardinfo"><div class="weapon">'+esc(s.weapon)+'</div><div class="name">'+esc(s.name)+'</div><div class="wear">'+esc((s.wears&&s.wears.length?s.wears.slice(0,3).join(' · '):s.wear))+'</div><div class="cardfoot"><span class="price">'+(hasPrice?money(s.price):'Ціна гравця')+'</span><button class="btn primary buy" onclick="'+(hasPrice?'buy('+i+')':'findCatalogListing('+i+')')+'">'+(hasPrice?'Купити':'На маркеті')+'</button></div></div></article>'
+ }).join('');
+ const count=document.getElementById('catalogCount');
+ if(count)count.textContent='Знайдено: '+matching.length.toLocaleString('uk-UA')+' · показано: '+visible.length.toLocaleString('uk-UA');
+ const more=document.getElementById('loadMoreBtn');
+ if(more)more.style.display=visible.length<matching.length?'inline-flex':'none';
+ const counter=document.getElementById('skinCount');
+ if(counter)counter.textContent=catalogItems.length.toLocaleString('uk-UA');
+}
+function setFilter(button){document.querySelectorAll('#catalog .filter').forEach(function(x){x.classList.remove('active')});button.classList.add('active');catalogFilter=button.dataset.filter;catalogLimit=48;render()}
+function loadMoreSkins(){catalogLimit+=48;render()}
+function findCatalogListing(index){
+ const item=catalogItems[index];if(!item)return;
+ const input=document.getElementById('marketSearch');input.value=item.marketName;renderPlayerMarket();
+ document.getElementById('player-market').scrollIntoView({behavior:'smooth'});
+ toast('Шукаємо пропозиції для '+item.marketName)
+}
+function listingImage(item){return item.image||skinArt(item,0)}
+function toggleFavorite(button){button.classList.toggle('on');button.textContent=button.classList.contains('on')?'♥':'♡'}
+function renderPlayerMarket(){
+ const q=(document.getElementById('marketSearch').value||'').trim().toLowerCase();
+ const mode=document.getElementById('marketMode').value;
+ const rows=playerListings.filter(function(x){return (mode==='all'||x.type===mode)&&(x.item.marketName+' '+x.item.weapon+' '+x.item.name+' '+x.seller).toLowerCase().includes(q)});
+ const grid=document.getElementById('listingGrid');
+ if(!rows.length){grid.innerHTML='<div class="inventory-empty">Немає оголошень за цим запитом. У демо-версії можеш створити власне.</div>';return}
+ grid.innerHTML=rows.map(function(x){
+  return '<article class="listing-card"><div class="listing-art" style="--glow:'+esc(x.item.glow||'#c6f36b')+'"><img src="'+esc(listingImage(x.item))+'" data-fallback="'+esc(skinArt(x.item,0))+'" alt="'+esc(x.item.marketName)+'" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback"></div><div class="listing-top"><span class="listing-kind">'+(x.type==='trade'?'Обмін':'Продаж')+'</span><span class="demo-tag">'+(x.demo?'ДЕМО':'')+'</span></div><h3>'+esc(x.item.marketName)+'</h3><div class="wear">'+esc(x.item.wear||'Предмет CS2')+' · '+esc(x.seller)+'</div><div class="listing-bottom"><strong class="price">'+(x.type==='trade'?'Обмін':money(x.price))+'</strong><button class="btn primary" data-listing-id="'+esc(x.id)+'" onclick="listingAction(this)">'+(x.type==='trade'?'Запропонувати':'Купити')+'</button></div></article>'
+ }).join('')
+}
+function listingAction(button){const listing=playerListings.find(function(x){return x.id===button.dataset.listingId});if(!listing)return;if(listing.type==='trade')proposePlayerTrade(listing.id);else buyPlayerListing(listing.id)}function currentInventory(){return steamSession?steamInventory:demoInventory}
+function renderInventory(){
+ const status=document.getElementById('inventoryStatus');
+ const grid=document.getElementById('inventoryGrid');
+ const note=document.getElementById('inventoryNote');
+ const button=document.getElementById('steamBtn');
+ if(steamSession){
+  status.textContent='Steam: '+(steamSession.displayName||steamSession.name||'підключено')+' · '+steamInventory.length+' предметів';
+  button.textContent='Steam підключено';
+  note.textContent='Предмети отримані через сервер TradeUp. Steam Trade URL та asset ID залишаються на сервері.';
+ }else{
+  status.textContent='Підключи Steam, щоб побачити предмети зі свого акаунта.';
+  button.textContent='Увійти через Steam';
+  note.textContent=API_BASE?'Авторизація й інвентар запитуються через налаштований сервер.':'Steam OpenID і завантаження інвентаря підключаються через сервер; наразі сайт на GitHub Pages без API.';
+ }
+ const items=currentInventory();
+ if(!items.length){grid.innerHTML='<div class="inventory-empty">'+(steamSession?'У публічному інвентарі не знайдено предметів. Перевір налаштування приватності Steam.':'Після підключення Steam тут з’являться твої скіни. Демо-покупки також зберігаються в цьому браузері.')+'</div>';return}
+ grid.innerHTML=items.map(function(item,i){
+  const label=item.marketName||item.market_hash_name||item.name||'Предмет CS2';
+  const img=item.image||item.icon_url||'';
+  return '<article class="inventory-item"><img src="'+esc(img)+'" data-fallback="'+esc(skinArt(item,i))+'" alt="'+esc(label)+'" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback"><h3>'+esc(label)+'</h3><div class="wear">'+(steamSession?'Steam інвентар':'Демо-предмет')+'</div><button class="btn secondary" onclick="openListingFromInventory('+i+')">Продати / обміняти</button></article>'
+ }).join('')
+}
+function openListingFromInventory(index){const item=currentInventory()[index];if(item)openListingModal(item)}
+function steamLogin(){
+ if(!API_BASE){
+  document.getElementById('modtitle').textContent='Steam-вхід';
+  document.getElementById('modbody').innerHTML='<p class="hint">Сайт зараз розміщений на статичному GitHub Pages. Steam OpenID потребує бекенд для перевірки входу й читання інвентаря.</p><p class="hint">Коли сервер буде готовий, вкажи його адресу в <code>window.TRADEUP_CONFIG.apiBase</code>. Кнопка автоматично відкриватиме серверний маршрут <code>/auth/steam/start</code>.</p><button class="btn secondary" onclick="closeModal()">Зрозуміло</button>';
+  document.getElementById('modtitle').textContent='Увійти через Steam';
+  document.getElementById('modalbg').classList.add('show');
+  return
+ }
+ location.assign(API_BASE+'/auth/steam/start?return_to='+encodeURIComponent(location.origin+location.pathname))
+}
+async function refreshSteamInventory(){
+ if(!API_BASE){renderInventory();toast('Steam API ще не налаштований');return}
+ try{
+  const response=await fetch(API_BASE+'/api/session',{credentials:'include'});
+  if(!response.ok){steamSession=null;steamInventory=[];drawBalance();renderInventory();toast('Спочатку увійди через Steam');return}
+  const session=await response.json();steamSession=session.user||session;drawBalance();
+  const inventoryResponse=await fetch(API_BASE+'/api/inventory',{credentials:'include'});
+  if(!inventoryResponse.ok)throw new Error('Inventory API error');
+  const payload=await inventoryResponse.json();steamInventory=Array.isArray(payload)?payload:(payload.items||[]);
+  renderInventory()
+ }catch(error){steamSession=null;steamInventory=[];drawBalance();renderInventory();toast('Не вдалося зв’язатися із сервером Steam')}
+}
+async function loadAllSkins(){
+ const status=document.getElementById('catalogStatus');
+ try{
+  const controller=new AbortController();const timer=setTimeout(function(){controller.abort()},25000);
+  const response=await fetch(skinCatalogUrl,{signal:controller.signal,cache:'force-cache'});clearTimeout(timer);
+  if(!response.ok)throw new Error('Catalog HTTP '+response.status);
+  const raw=await response.json();
+  if(!Array.isArray(raw)||!raw.length)throw new Error('Empty catalog');
+  const normalized=raw.map(normalizeSkin).filter(function(x){return x.image&&x.marketName});
+  if(!normalized.length)throw new Error('No images in catalog');
+  catalogItems=normalized;skins=normalized;
+  status.textContent='Усі унікальні скіни CS2 з варіантами зносу та зображеннями · назви з каталогу англійською.';
+  render()
+ }catch(error){
+  status.textContent='Повний каталог тимчасово недоступний. Показано вбудовані приклади.';
+  catalogItems=featuredSkins;skins=featuredSkins;render()
+ }
+}
+function renderListSuggestions(query){
+ const box=document.getElementById('listSuggestions');if(!box)return;
+ const q=(query||'').trim().toLowerCase();
+ if(q.length<2){box.innerHTML='';return}
+ const matches=catalogItems.filter(function(s){return s.marketName.toLowerCase().includes(q)}).slice(0,7);
+ box.innerHTML=matches.map(function(s){return '<button type="button" class="suggestion" data-skin="'+encodeURIComponent(s.id)+'" onclick="chooseListingSkin(this)">'+esc(s.marketName)+'</button>'}).join('')||'<span class="hint">Нічого не знайдено</span>'
+}
+function chooseListingSkin(button){
+ const id=decodeURIComponent(button.dataset.skin);selectedListingSkin=catalogItems.find(function(s){return s.id===id})||null;
+ const input=document.getElementById('listItemName');if(input&&selectedListingSkin)input.value=selectedListingSkin.marketName;
+ document.getElementById('listSuggestions').innerHTML=selectedListingSkin?'<span class="hint">Обрано: '+esc(selectedListingSkin.marketName)+'</span>':''
+}
+function openListingModal(inventoryItem){
+ if(!user&&!steamSession){openModal('login');toast('Увійди, щоб створити демо-оголошення');return}
+ selectedListingSkin=null;
+ const fixed=inventoryItem||null;
+ const label=fixed?(fixed.marketName||fixed.market_hash_name||fixed.name||'Предмет зі Steam'):'';
+ if(fixed)selectedListingSkin=fixed;
+ document.getElementById('modtitle').textContent='Нове оголошення';
+ document.getElementById('modbody').innerHTML='<p class="hint">'+(steamSession?'Оголошення буде передано серверу.':'Демо-оголошення зберігається лише у цьому браузері.')+'</p><div class="field"><label>Предмет</label><input id="listItemName" '+(fixed?'readonly':'')+' value="'+esc(label)+'" placeholder="Наприклад, AK-47 | The Empress" oninput="selectedListingSkin=null;renderListSuggestions(this.value)"><div id="listSuggestions" class="suggestions"></div></div><div class="field"><label>Тип оголошення</label><select id="listType" class="select"><option value="sell">Продаж</option><option value="trade">Обмін</option></select></div><div class="field"><label>Ціна у гривнях (для продажу)</label><input id="listPrice" type="number" min="1" placeholder="Наприклад, 1200"></div><button class="btn primary" onclick="createPlayerListing()">Опублікувати</button>'
+ document.getElementById('modalbg').classList.add('show')
+}
+async function createPlayerListing(){
+ const mode=document.getElementById('listType').value;
+ const price=Number(document.getElementById('listPrice').value);
+ if(!selectedListingSkin){toast('Обери предмет зі списку каталогу або Steam-інвентаря');return}
+ if(mode==='sell'&&(!Number.isFinite(price)||price<1)){toast('Вкажи ціну від 1 ₴');return}
+ const item=selectedListingSkin;
+ if(steamSession&&API_BASE){
+  if(!item.assetid&&!item.assetId){toast('Цей предмет має надійти з підключеного Steam-інвентаря');return}
+  try{
+   const response=await fetch(API_BASE+'/api/listings',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({assetId:item.assetid||item.assetId,type:mode,price:mode==='sell'?price:null})});
+   if(!response.ok)throw new Error('Listing API error');
+   const created=await response.json();playerListings.unshift(created.listing||created);closeModal();renderPlayerMarket();toast('Оголошення передано серверу')
+  }catch(error){toast('Сервер не прийняв оголошення')}
+  return
+ }
+ if(steamSession){toast('Підключи сервер API для публікації Steam-предмета');return}
+ const listing={id:'local-'+Date.now(),type:mode,price:mode==='sell'?price:0,item:{id:item.id,marketName:item.marketName||item.name, name:item.name||item.marketName,weapon:item.weapon||'CS2',cat:item.cat||'Інше',wear:item.wear||'Демо-лот',grade:item.grade||'CS2',image:item.image||item.icon_url||'',glow:item.glow||'#c6f36b'},seller:user.email.split('@')[0],demo:true};
+ playerListings.unshift(listing);saveListings();closeModal();renderPlayerMarket();toast('Демо-оголошення збережено в цьому браузері')
+}
+function buy(i){
+ const item=catalogItems[i];if(!item)return;
+ if(!Number.isFinite(item.price)||item.price<=0){findCatalogListing(i);return}
+ if(!user){openModal('login');toast('Увійди, щоб придбати предмет');return}
+ if(user.balance<item.price){openModal('topup');toast('Недостатньо коштів — поповни баланс');return}
+ if(confirm('Купити '+item.marketName+' за '+money(item.price)+'? (демо)')){
+  user.balance-=item.price;save();
+  demoInventory.unshift({id:item.id,marketName:item.marketName,name:item.name,weapon:item.weapon,cat:item.cat,wear:item.wear,image:item.image,grade:item.grade,glow:item.glow});
+  localStorage.setItem('tradeupInventory',JSON.stringify(demoInventory));renderInventory();toast('Демо-предмет додано до інвентаря')
+ }
+}
+async function buyPlayerListing(id){
+ const listing=playerListings.find(function(x){return x.id===id});if(!listing)return;
+ if(listing.type==='trade'){proposePlayerTrade(id);return}
+ if(steamSession&&API_BASE){
+  try{const r=await fetch(API_BASE+'/api/listings/'+encodeURIComponent(id)+'/buy',{method:'POST',credentials:'include'});if(!r.ok)throw new Error();toast('Запит на купівлю надіслано серверу');return}catch(e){toast('Сервер не прийняв купівлю');return}
+ }
+ if(!user){openModal('login');toast('Увійди для демо-купівлі');return}
+ if(user.balance<listing.price){openModal('topup');toast('Недостатньо демо-балансу');return}
+ if(!confirm('Купити '+listing.item.marketName+' за '+money(listing.price)+'? Це локальна демо-угода.'))return;
+ user.balance-=listing.price;save();playerListings=playerListings.filter(function(x){return x.id!==id});saveListings();
+ demoInventory.unshift(listing.item);localStorage.setItem('tradeupInventory',JSON.stringify(demoInventory));
+ renderPlayerMarket();renderInventory();toast('Демо-покупку виконано')
+}
+function proposePlayerTrade(id){
+ const listing=playerListings.find(function(x){return x.id===id});if(!listing)return;
+ if(!user&&!steamSession){openModal('login');toast('Увійди, щоб надіслати демо-пропозицію');return}
+ document.getElementById('modtitle').textContent='Запропонувати обмін';
+ document.getElementById('modbody').innerHTML='<p class="hint">Предмет: <b>'+esc(listing.item.marketName)+'</b></p><div class="field"><label>Твоя пропозиція</label><input id="tradeOfferText" placeholder="Назва предмета або деталі обміну"></div><button class="btn primary" data-listing-id="'+esc(id)+'" onclick="submitPlayerTrade(this.dataset.listingId)">Надіслати пропозицію</button><p class="hint">У демо пропозиція лишиться в цьому браузері.</p>';
+ document.getElementById('modalbg').classList.add('show')
+}async function submitPlayerTrade(id){
+ const text=document.getElementById('tradeOfferText').value.trim();if(!text){toast('Опиши предмет для обміну');return}
+ if(steamSession&&API_BASE){
+  try{const r=await fetch(API_BASE+'/api/listings/'+encodeURIComponent(id)+'/offer',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});if(!r.ok)throw new Error();closeModal();toast('Пропозицію передано серверу');return}catch(e){toast('Сервер не прийняв пропозицію');return}
+ }
+ let offers=[];try{offers=JSON.parse(localStorage.getItem('tradeupOffers')||'[]')}catch(e){}
+ offers.push({listingId:id,message:text,createdAt:new Date().toISOString()});localStorage.setItem('tradeupOffers',JSON.stringify(offers));closeModal();toast('Демо-пропозицію збережено локально')
+}
+function drawBalance(){
+ const balance=document.getElementById('balance');if(balance)balance.textContent=money(user?.balance||0);
+ const logged=!!(user||steamSession);
+ const loginButton=document.getElementById('loginBtn');if(loginButton)loginButton.style.display=logged?'none':'';
+ const accountButton=document.getElementById('accountBtn');
+ if(accountButton){
+  accountButton.style.display=logged?'':'none';
+  if(steamSession&&!user){accountButton.textContent=steamSession.displayName||steamSession.name||'Steam профіль';accountButton.onclick=openSteamProfile}
+  else{accountButton.textContent='Мій профіль';accountButton.onclick=function(){openModal('account')}}
+ }
+}
+function openSteamProfile(){
+ const name=steamSession&&(steamSession.displayName||steamSession.name)||'Steam гравець';
+ document.getElementById('modtitle').textContent='Steam профіль';
+ document.getElementById('modbody').innerHTML='<p>Вітаємо, <b>'+esc(name)+'</b></p><p class="hint">Сесію Steam підтверджує сервер TradeUp.</p><button class="btn secondary" onclick="steamLogout()">Вийти зі Steam</button>';
+ document.getElementById('modalbg').classList.add('show')
+}
+async function steamLogout(){
+ if(API_BASE){try{await fetch(API_BASE+'/auth/logout',{method:'POST',credentials:'include'})}catch(e){}}
+ steamSession=null;steamInventory=[];drawBalance();renderInventory();closeModal();toast('Вихід зі Steam виконано')
+}async function initTradeUp(){
+ drawBalance();render();renderPlayerMarket();renderInventory();
+ loadAllSkins();
+ if(API_BASE)await refreshSteamInventory();
+}
+initTradeUp();
 </script></body></html>
-
